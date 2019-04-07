@@ -2,6 +2,8 @@
 {
     public enum CartItemErrorCode
     {
-        InvalidProduct
+        InvalidProduct,
+        InvalidUser,
+        InsufficientStock
     }
 }
