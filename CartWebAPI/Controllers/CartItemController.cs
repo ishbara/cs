@@ -1,6 +1,7 @@
 ﻿namespace CartWebAPI.Controllers
 {
     using System;
+    using Cart.Core;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,11 @@
     [ApiController]
     public class CartItemController : ControllerBase
     {
-        private readonly IProductsApiConnector productsApi;
+        private readonly CartItemService cartItemService;
 
-        public CartItemController(IProductsApiConnector productsApi)
+        public CartItemController(CartItemService cartItemService)
         {
-            this.productsApi = productsApi;
+            this.cartItemService = cartItemService;
         }
 
         [HttpPost]
