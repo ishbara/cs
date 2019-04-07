@@ -11,6 +11,7 @@ namespace CartWebApi.Tests.Integration
     public class CartItemTests
         : IClassFixture<WebApplicationFactory<Startup>>
     {
+        private const string Url = "cart/item";
         private readonly WebApplicationFactory<Startup> factory;
 
         public CartItemTests(WebApplicationFactory<Startup> factory)
@@ -18,17 +19,11 @@ namespace CartWebApi.Tests.Integration
             this.factory = factory;
         }
 
-        [Theory]
-        [InlineData("cart/item")]
-        public async Task Returns_400_For_No_Input(string url)
+        [Fact]
+        public async Task Returns_400_For_No_Input()
         {
-            //var request = new AddCartItemRequest
-            //{
-            //    ProductId = 0
-            //};
-
             var client = this.GetClient();
-            var result = await client.PostAsJsonAsync(url, "");
+            var result = await client.PostAsJsonAsync<AddCartItemRequest>(Url, null);
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
         }
 
