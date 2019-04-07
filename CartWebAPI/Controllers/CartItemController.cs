@@ -8,8 +8,11 @@
     [ApiController]
     public class CartItemController : ControllerBase
     {
-        public CartItemController()
+        private readonly IProductsApiConnector productsApi;
+
+        public CartItemController(IProductsApiConnector productsApi)
         {
+            this.productsApi = productsApi;
         }
 
         [HttpPost]

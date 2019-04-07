@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{87F7D886
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartWebApi.Tests.Integration", "tests\CartWebApi.Tests.Integration\CartWebApi.Tests.Integration.csproj", "{DC6CB36F-2EF7-40A9-8D24-88321A5D8754}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Core", "Cart.Core\Cart.Core.csproj", "{A1AA9CC7-AF89-422A-A3A1-0349C8092998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.ApiMocks", "Cart.ApiMocks\Cart.ApiMocks.csproj", "{2C4B0608-93EE-498C-A93F-AB75D04F362D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{DC6CB36F-2EF7-40A9-8D24-88321A5D8754}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC6CB36F-2EF7-40A9-8D24-88321A5D8754}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC6CB36F-2EF7-40A9-8D24-88321A5D8754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1AA9CC7-AF89-422A-A3A1-0349C8092998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1AA9CC7-AF89-422A-A3A1-0349C8092998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1AA9CC7-AF89-422A-A3A1-0349C8092998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1AA9CC7-AF89-422A-A3A1-0349C8092998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4B0608-93EE-498C-A93F-AB75D04F362D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4B0608-93EE-498C-A93F-AB75D04F362D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4B0608-93EE-498C-A93F-AB75D04F362D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4B0608-93EE-498C-A93F-AB75D04F362D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
