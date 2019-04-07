@@ -1,6 +1,5 @@
 ﻿namespace CartWebAPI.Controllers
 {
-    using System;
     using Cart.Core;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
@@ -22,13 +21,12 @@
             try
             {
                 this.cartItemService.AddCartItem(request.ToCartItem());
+                return this.Ok();
             }
             catch (CartException exc)
             {
                 return this.BadRequest(exc.Message);
             }
-
-            throw new NotImplementedException();
         }
     }
 }

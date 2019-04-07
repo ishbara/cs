@@ -1,14 +1,10 @@
 ﻿namespace Cart.Core
 {
-    using System;
     using Cart.Core.Connectors;
+    using Cart.Core.Core.IoC;
     using Cart.Core.Data;
 
-    public interface ICartItemService
-    {
-        void AddCartItem(CartItem cartItem);
-    }
-
+    [BindOn(typeof(ICartItemService))]
     public class CartItemService : ICartItemService
     {
         private readonly IProductsApiConnector productsApi;

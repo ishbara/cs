@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartWebApi.Tests", "tests\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Core.Tests", "tests\Cart.Core.Tests\Cart.Core.Tests.csproj", "{5D43D09B-1E03-4FB2-B77D-553559715F0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.SimpleInjector", "Cart.SimpleInjector\Cart.SimpleInjector.csproj", "{9F158119-F1EC-4810-9D55-F19740497E01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{5D43D09B-1E03-4FB2-B77D-553559715F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D43D09B-1E03-4FB2-B77D-553559715F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D43D09B-1E03-4FB2-B77D-553559715F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F158119-F1EC-4810-9D55-F19740497E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F158119-F1EC-4810-9D55-F19740497E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F158119-F1EC-4810-9D55-F19740497E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F158119-F1EC-4810-9D55-F19740497E01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
