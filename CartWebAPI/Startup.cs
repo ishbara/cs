@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace CartWebAPI
+﻿namespace CartWebAPI
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.DependencyInjection;
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,4 +28,5 @@ namespace CartWebAPI
             });
         }
     }
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
 }
