@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Route("[controller]")]
-    public class CartController : ControllerBase
+    public class CartItemController : ControllerBase
     {
         [HttpGet]
         public string Get()

@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartWebAPI", "CartWebAPI\CartWebAPI.csproj", "{9F99AE59-DFB4-4990-8E42-E73D3BB6B02F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{87F7D886-B8F3-443D-815C-C2DAE61647EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartWebApi.Tests", "tests\CartWebApi.Tests\CartWebApi.Tests.csproj", "{47FF0548-A876-4B50-8AD3-A102715D32DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{9F99AE59-DFB4-4990-8E42-E73D3BB6B02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F99AE59-DFB4-4990-8E42-E73D3BB6B02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F99AE59-DFB4-4990-8E42-E73D3BB6B02F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47FF0548-A876-4B50-8AD3-A102715D32DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47FF0548-A876-4B50-8AD3-A102715D32DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47FF0548-A876-4B50-8AD3-A102715D32DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47FF0548-A876-4B50-8AD3-A102715D32DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47FF0548-A876-4B50-8AD3-A102715D32DD} = {87F7D886-B8F3-443D-815C-C2DAE61647EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {098BE713-2444-4D9D-B22C-E767EFA71793}
