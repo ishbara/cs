@@ -1,7 +1,8 @@
 ﻿namespace Cart.Core
 {
-    using Cart.Core.Connectors;
     using System;
+    using Cart.Core.Connectors;
+    using Cart.Core.Data;
 
     public interface ICartItemService
     {
@@ -12,16 +13,25 @@
     {
         private readonly IProductsApiConnector productsApi;
         private readonly IUserApiConnector userApi;
+        private readonly ICartItemDataGateway dataGateway;
 
         public CartItemService(
             IProductsApiConnector productsApi,
-            IUserApiConnector userApi)
+            IUserApiConnector userApi,
+            ICartItemDataGateway dataGateway)
         {
             this.productsApi = productsApi;
             this.userApi = userApi;
+            this.dataGateway = dataGateway;
         }
 
         public void AddCartItem(CartItem cartItem)
+        {
+            this.ValidateForNewCartItem(cartItem);
+            this.dataGateway.AddCartItem(cartItem);
+        }
+
+        private void ValidateForNewCartItem(CartItem cartItem)
         {
             if (!this.productsApi.ProductExists(cartItem.ProductId))
             {
@@ -44,8 +54,6 @@
                     CartItemErrorCode.InsufficientStock,
                     "Insufficient stock");
             }
-
-            throw new NotImplementedException();
         }
     }
 }
