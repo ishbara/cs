@@ -9,9 +9,9 @@
     [ApiController]
     public class CartItemController : ControllerBase
     {
-        private readonly CartItemService cartItemService;
+        private readonly ICartItemService cartItemService;
 
-        public CartItemController(CartItemService cartItemService)
+        public CartItemController(ICartItemService cartItemService)
         {
             this.cartItemService = cartItemService;
         }
@@ -19,6 +19,15 @@
         [HttpPost]
         public IActionResult Post(AddCartItemRequest request)
         {
+            try
+            {
+                this.cartItemService.AddCartItem(request.ToCartItem());
+            }
+            catch (CartException exc)
+            {
+                return this.BadRequest(exc.Message);
+            }
+
             throw new NotImplementedException();
         }
     }

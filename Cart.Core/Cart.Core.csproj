@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\cs.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\cs.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.12.0.8217">
