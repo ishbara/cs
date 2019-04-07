@@ -1,14 +1,21 @@
 ﻿namespace CartWebAPI.Controllers
 {
+    using System;
+    using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
 
-    [Route("[controller]")]
+    [Route("cart/item")]
+    [ApiController]
     public class CartItemController : ControllerBase
     {
-        [HttpGet]
-        public string Get()
+        public CartItemController()
         {
-            return "Hello world";
+        }
+
+        [HttpPost]
+        public IActionResult Post(AddCartItemRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
