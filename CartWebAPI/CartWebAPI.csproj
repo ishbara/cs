@@ -21,6 +21,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cart.ApiMocks\Cart.ApiMocks.csproj" />
     <ProjectReference Include="..\Cart.Core\Cart.Core.csproj" />
     <ProjectReference Include="..\Cart.SimpleInjector\Cart.SimpleInjector.csproj" />
   </ItemGroup>

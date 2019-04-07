@@ -1,5 +1,6 @@
 ﻿namespace CartWebAPI
 {
+    using Cart.ApiMocks;
     using Cart.Core;
     using Cart.Core.IoC;
     using Cart.SimpleInjector;
@@ -16,6 +17,7 @@
         {
             SimpleInjectorContainer.Initialize();
             CoreBootstrapper.BindDependencies();
+            ApiMockBootstrapper.BindDependencies();
 
             AssemblyBinder.BindAssemby(typeof(AppBootstrapper).Assembly);
         }
