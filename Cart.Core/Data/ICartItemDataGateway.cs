@@ -4,6 +4,8 @@
 
     public interface ICartItemDataGateway
     {
-        Task AddCartItemAsync(CartItem cartItem);
+        Task<UserCart> GetUserCartAsync(int userId);
+
+        Task SaveUserCartAsync(UserCart userCart);
     }
 }

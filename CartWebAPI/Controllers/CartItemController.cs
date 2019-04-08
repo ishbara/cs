@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using Cart.Core;
     using Cart.Core.Core.IoC;
+    using Cart.Core.Diagnostics;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
 

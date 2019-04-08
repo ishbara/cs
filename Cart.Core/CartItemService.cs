@@ -4,7 +4,11 @@
     using Cart.Core.Connectors;
     using Cart.Core.Core.IoC;
     using Cart.Core.Data;
+    using Cart.Core.Diagnostics;
 
+    /// <summary>
+    /// Implements Cart item operations
+    /// </summary>
     [BindOn(typeof(ICartItemService))]
     public class CartItemService : ICartItemService
     {
@@ -22,35 +26,35 @@
             this.dataGateway = dataGateway;
         }
 
-        public Task AddCartItemAsync(CartItem cartItem)
+        /// <summary>
+        /// Adds new cart item to the specified user.
+        /// If the product is already in cart increases its quantity
+        /// </summary>
+        /// <param name="cartItem">Cart item to be added.</param>
+        /// <returns>Awaitable task</returns>
+        public async Task AddCartItemAsync(NewCartItem cartItem)
         {
-            this.ValidateForNewCartItem(cartItem);
-            return this.dataGateway.AddCartItemAsync(cartItem);
-        }
-
-        private void ValidateForNewCartItem(CartItem cartItem)
-        {
-            if (!this.productsApi.ProductExists(cartItem.ProductId))
+            var userCart = await this.dataGateway.GetUserCartAsync(cartItem.UserId);
+            if (userCart == null)
             {
-                throw new CartException(
-                    CartItemErrorCode.InvalidProduct,
-                    "Invalid product");
+                userCart = this.InitializeUserCart(cartItem);
             }
 
+            // No need to check for existing user since the user cart is already created.
+            userCart.AddToCart(this.productsApi, cartItem);
+            await this.dataGateway.SaveUserCartAsync(userCart);
+        }
+
+        private UserCart InitializeUserCart(NewCartItem cartItem)
+        {
             if (!this.userApi.UserExists(cartItem.UserId))
             {
                 throw new CartException(
-                    CartItemErrorCode.InvalidUser,
+                    CartErrorCode.InvalidUser,
                     "Invalid user");
             }
 
-            var stock = this.productsApi.GetStock(cartItem.ProductId);
-            if (stock < cartItem.Quantity)
-            {
-                throw new CartException(
-                    CartItemErrorCode.InsufficientStock,
-                    "Insufficient stock");
-            }
+            return new UserCart(cartItem.UserId);
         }
     }
 }

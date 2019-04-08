@@ -14,7 +14,7 @@
         [Required]
         public int Quantity { get; set; }
 
-        public CartItem ToCartItem()
-            => new CartItem(this.ProductId, this.UserId, this.Quantity);
+        public NewCartItem ToCartItem()
+            => new NewCartItem(this.UserId, this.ProductId, this.Quantity);
     }
 }

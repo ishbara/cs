@@ -6,22 +6,27 @@
 
     public class CartItemDataMock : ICartItemDataGateway
     {
-        private readonly List<CartItem> cartItems;
+        private readonly Dictionary<int, UserCart> userCarts;
 
         public CartItemDataMock()
         {
-            this.cartItems = new List<CartItem>();
+            this.userCarts = new Dictionary<int, UserCart>();
         }
 
-        public Task AddCartItemAsync(CartItem cartItem)
+        public Task<UserCart> GetUserCartAsync(int userId)
         {
-            this.cartItems.Add(cartItem);
+            if (this.userCarts.TryGetValue(userId, out UserCart cart))
+            {
+                return Task.FromResult(cart);
+            }
+
+            return Task.FromResult<UserCart>(null);
+        }
+
+        public Task SaveUserCartAsync(UserCart userCart)
+        {
+            this.userCarts[userCart.UserId] = userCart;
             return Task.CompletedTask;
-        }
-
-        public bool Contains(CartItem cartItem)
-        {
-            return this.cartItems.Contains(cartItem);
         }
     }
 }

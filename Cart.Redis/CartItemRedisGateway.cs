@@ -20,11 +20,26 @@
             this.mux = ConnectionMultiplexer.Connect(redisConfig.RedisEndpoint);
         }
 
-        public Task AddCartItemAsync(CartItem cartItem)
+        public async Task<UserCart> GetUserCartAsync(int userId)
         {
             var db = this.mux.GetDatabase();
-            string key = "cart:" + cartItem.UserId;
-            return db.ListRightPushAsync(key, JsonConvert.SerializeObject(cartItem));
+            var key = GetKey(userId);
+            var rawResult = await db.StringGetAsync(key);
+            var userCartData = JsonConvert.DeserializeObject<UserCartData>(rawResult);
+            return userCartData.ToUserCart();
+        }
+
+        public Task SaveUserCartAsync(UserCart userCart)
+        {
+            var db = this.mux.GetDatabase();
+            var userCartData = UserCartData.FromUserCart(userCart);
+            var key = GetKey(userCartData.UserId);
+            return db.StringSetAsync(key, JsonConvert.SerializeObject(userCartData));
+        }
+
+        private static string GetKey(int userId)
+        {
+            return "cart:" + userId;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Cart.Core
+﻿namespace Cart.Core.Diagnostics
 {
-    public enum CartItemErrorCode
+    public enum CartErrorCode
     {
         InvalidProduct,
         InvalidUser,

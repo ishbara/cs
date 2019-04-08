@@ -1,11 +1,11 @@
 ﻿namespace Cart.Core
 {
-    public class CartItem
+    public class NewCartItem
     {
-        public CartItem(int productId, int userId, int quantity)
+        public NewCartItem(int userId, int productId, int quantity)
         {
-            this.ProductId = productId;
             this.UserId = userId;
+            this.ProductId = productId;
             this.Quantity = quantity;
         }
 

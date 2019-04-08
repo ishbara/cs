@@ -15,8 +15,8 @@
         {
             var serviceMock = new Mock<ICartItemService>();
             string message = "Test Exception";
-            var exc = new CartException(CartItemErrorCode.InvalidProduct, message);
-            serviceMock.Setup(s => s.AddCartItemAsync(It.IsAny<CartItem>())).Throws(exc);
+            var exc = new CartException(CartErrorCode.InvalidProduct, message);
+            serviceMock.Setup(s => s.AddCartItemAsync(It.IsAny<NewCartItem>())).Throws(exc);
 
             var controler = new CartItemController(serviceMock.Object);
             var result = await controler.PostAsync(new AddCartItemRequest());

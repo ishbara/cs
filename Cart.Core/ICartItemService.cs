@@ -2,8 +2,11 @@
 {
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Exposes methods for cart item operations
+    /// </summary>
     public interface ICartItemService
     {
-        Task AddCartItemAsync(CartItem cartItem);
+        Task AddCartItemAsync(NewCartItem cartItem);
     }
 }
