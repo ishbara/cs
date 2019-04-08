@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Cart.Core.Core.IoC
+﻿namespace Cart.Core.Core.IoC
 {
+    using System;
+
     /// <summary> Specifies the type should be used for auto binding the specified interface. </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public sealed class BindOnAttribute : Attribute

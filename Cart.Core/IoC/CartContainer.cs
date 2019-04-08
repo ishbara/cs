@@ -5,9 +5,9 @@
     public static class CartContainer
     {
         private static readonly object LockObject = new object();
-        private static IocContainer container;
+        private static IOCContainer container;
 
-        public static IocContainer Current
+        public static IOCContainer Current
         {
             get => container
                     ?? throw new InvalidOperationException("Service locator should be set " +

@@ -7,10 +7,6 @@ namespace CartWebApi.Tests.Integration
 
     public class CartItemModelTests
     {
-        public CartItemModelTests()
-        {
-        }
-
         [Fact]
         public void Converts_To_CartItem()
         {

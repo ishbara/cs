@@ -1,8 +1,7 @@
 ﻿namespace CartWebAPI.Model
 {
-    using Cart.Core;
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using Cart.Core;
 
     public class AddCartItemRequest
     {

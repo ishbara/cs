@@ -5,7 +5,7 @@
     using global::SimpleInjector;
 
     /// <summary> Implementation of IocContainer based on SimpleInjector </summary>
-    public class SimpleInjectorContainer : IocContainer
+    public class SimpleInjectorContainer : IOCContainer
     {
         private readonly Container container;
 
@@ -17,8 +17,8 @@
         public static void Initialize()
         {
             var siContainer = new Container();
-            siContainer.RegisterInstance<IocContainer>(new SimpleInjectorContainer(siContainer));
-            CartContainer.Current = siContainer.GetInstance<IocContainer>();
+            siContainer.RegisterInstance<IOCContainer>(new SimpleInjectorContainer(siContainer));
+            CartContainer.Current = siContainer.GetInstance<IOCContainer>();
         }
 
         public void Bind(Type service, Type implementation, BindingScope scope)

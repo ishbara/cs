@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace Cart.Core.Core.IoC
+﻿namespace Cart.Core.Core.IoC
 {
+    using System;
+
     /// <summary> Represents an IoC container. </summary>
-    public interface IocContainer
+    public interface IOCContainer
     {
         /// <summary> Gets an instance of T injected with all dependencies. </summary>
         /// <typeparam name="T">Type of the object that is requested.</typeparam>

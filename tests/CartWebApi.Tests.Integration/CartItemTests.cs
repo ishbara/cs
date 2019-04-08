@@ -27,7 +27,7 @@ namespace CartWebApi.Tests.Integration
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
         }
 
-        private HttpClient GetClient() => 
+        private HttpClient GetClient() =>
             this.factory.CreateDefaultClient();
     }
 }
