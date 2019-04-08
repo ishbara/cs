@@ -27,5 +27,10 @@
     <ProjectReference Include="..\Cart.Redis\Cart.Redis.csproj" />
     <ProjectReference Include="..\Cart.SimpleInjector\Cart.SimpleInjector.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="redisSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

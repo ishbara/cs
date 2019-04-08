@@ -24,6 +24,7 @@
             ApiMockBootstrapper.BindDependencies();
 
             AssemblyBinder.BindAssemby(typeof(AppBootstrapper).Assembly);
+            container.Container.Register<IRedisConfiguration>(RedisConfig.Read, Lifestyle.Singleton);
             return container.Container;
         }
     }

@@ -4,10 +4,10 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Controllers;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using SimpleInjector;
     using SimpleInjector.Integration.AspNetCore.Mvc;
-    using SimpleInjector.Lifestyles;
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static
     public class Startup
