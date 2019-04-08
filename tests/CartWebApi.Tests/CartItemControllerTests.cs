@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using Cart.Core;
+    using Cart.Core.Diagnostics;
     using CartWebAPI.Controllers;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
