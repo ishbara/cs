@@ -34,7 +34,8 @@
         /// <returns>Awaitable task</returns>
         public async Task AddCartItemAsync(NewCartItem cartItem)
         {
-            var userCart = await this.dataGateway.GetUserCartAsync(cartItem.UserId);
+            var userCart = await this.dataGateway.GetUserCartAsync(cartItem.UserId)
+                .ConfigureAwait(false);
             if (userCart == null)
             {
                 userCart = this.InitializeUserCart(cartItem);
@@ -42,7 +43,7 @@
 
             // No need to check for existing user since the user cart is already created.
             userCart.AddToCart(this.productsApi, cartItem);
-            await this.dataGateway.SaveUserCartAsync(userCart);
+            await this.dataGateway.SaveUserCartAsync(userCart).ConfigureAwait(false);
         }
 
         private UserCart InitializeUserCart(NewCartItem cartItem)

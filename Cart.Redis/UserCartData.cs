@@ -7,7 +7,9 @@
     {
         public int UserId { get; set; }
 
+#pragma warning disable S4004 // Collection properties should be readonly
         public Dictionary<int, int> CartItems { get; set; }
+#pragma warning restore S4004 // Collection properties should be readonly
 
         public static UserCartData FromUserCart(UserCart cart)
         {

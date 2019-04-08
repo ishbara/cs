@@ -24,7 +24,7 @@
         {
             var db = this.mux.GetDatabase();
             var key = GetKey(userId);
-            var rawResult = await db.StringGetAsync(key);
+            var rawResult = await db.StringGetAsync(key).ConfigureAwait(false);
             var userCartData = JsonConvert.DeserializeObject<UserCartData>(rawResult);
             return userCartData.ToUserCart();
         }
