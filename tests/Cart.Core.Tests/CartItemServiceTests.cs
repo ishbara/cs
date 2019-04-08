@@ -23,9 +23,7 @@
         public async Task Throws_Invalid_Product_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
-            this.userApiMock
-                .Setup(c => c.UserExists(It.IsAny<int>()))
-                .Returns(false);
+            this.MoqDefaultSetup(cartItem);
             this.productApiConnectorMock
                 .Setup(c => c.ProductExists(cartItem.ProductId))
                 .Returns(false);
@@ -40,9 +38,7 @@
         public async Task Throws_InvalidUser_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
-            this.productApiConnectorMock
-                .Setup(c => c.ProductExists(cartItem.ProductId))
-                .Returns(true);
+            this.MoqDefaultSetup(cartItem);
             this.userApiMock
                 .Setup(c => c.UserExists(cartItem.UserId))
                 .Returns(false);
@@ -57,15 +53,10 @@
         public async Task Throws_InsufficientStock_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
-            this.productApiConnectorMock
-                .Setup(c => c.ProductExists(cartItem.ProductId))
-                .Returns(true);
+            this.MoqDefaultSetup(cartItem);
             this.productApiConnectorMock
                 .Setup(c => c.GetStock(cartItem.ProductId))
                 .Returns(cartItem.Quantity - 1);
-            this.userApiMock
-                .Setup(c => c.UserExists(cartItem.UserId))
-                .Returns(true);
             var service = this.GetService();
 
             var exc = await Assert.ThrowsAsync<CartException>(
@@ -77,6 +68,19 @@
         public async Task Adds_CartItem_To_DataStore_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
+            this.MoqDefaultSetup(cartItem);
+            this.dataGatewayMock
+                .Setup(d => d.AddCartItemAsync(cartItem))
+                .Returns(Task.CompletedTask)
+                .Verifiable();
+
+            var service = this.GetService();
+            await service.AddCartItemAsync(cartItem);
+            this.dataGatewayMock.Verify(g => g.AddCartItemAsync(cartItem));
+        }
+
+        private void MoqDefaultSetup(CartItem cartItem)
+        {
             this.productApiConnectorMock
                 .Setup(c => c.ProductExists(cartItem.ProductId))
                 .Returns(true);
@@ -86,14 +90,6 @@
             this.userApiMock
                 .Setup(c => c.UserExists(cartItem.UserId))
                 .Returns(true);
-            this.dataGatewayMock
-                .Setup(d => d.AddCartItemAsync(cartItem))
-                .Returns(Task.CompletedTask)
-                .Verifiable();
-
-            var service = this.GetService();
-            await service.AddCartItemAsync(cartItem);
-            this.dataGatewayMock.Verify(g => g.AddCartItemAsync(cartItem));
         }
 
         private CartItemService GetService()
