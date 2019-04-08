@@ -7,18 +7,20 @@
     /// <summary> Implementation of IocContainer based on SimpleInjector </summary>
     public class SimpleInjectorContainer : IOCContainer
     {
-        private readonly Container container;
-
-        private SimpleInjectorContainer(Container container)
+        private SimpleInjectorContainer()
         {
-            this.container = container;
+            this.Container = new Container();
         }
 
-        public static void Initialize()
+        public Container Container { get; set; }
+
+        public static SimpleInjectorContainer Initialize()
         {
-            var siContainer = new Container();
-            siContainer.RegisterInstance<IOCContainer>(new SimpleInjectorContainer(siContainer));
-            CartContainer.Current = siContainer.GetInstance<IOCContainer>();
+            var containerInstance = new SimpleInjectorContainer();
+            containerInstance.Container
+                .RegisterInstance<IOCContainer>(containerInstance);
+            CartContainer.Current = containerInstance;
+            return containerInstance;
         }
 
         public void Bind(Type service, Type implementation, BindingScope scope)
@@ -38,13 +40,13 @@
                         $"Binding scope {scope} is not handled");
             }
 
-            this.container.Register(service, implementation, lifeStyle);
+            this.Container.Register(service, implementation, lifeStyle);
         }
 
         public T Get<T>()
             where T : class
         {
-            return this.container.GetInstance<T>();
+            return this.Container.GetInstance<T>();
         }
     }
 }

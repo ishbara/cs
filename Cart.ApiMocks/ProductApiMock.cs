@@ -1,10 +1,12 @@
 ﻿namespace Cart.ApiMocks
 {
     using Cart.Core.Connectors;
+    using Cart.Core.Core.IoC;
 
     /// <summary>
     /// A mock implementation for <see cref="IProductsApiConnector"/>
     /// </summary>
+    [BindOn(typeof(IProductsApiConnector), BindingScope = BindingScope.Singleton)]
     public class ProductApiMock : IProductsApiConnector
     {
         /// <summary>

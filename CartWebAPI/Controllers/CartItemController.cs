@@ -2,11 +2,13 @@
 {
     using System.Threading.Tasks;
     using Cart.Core;
+    using Cart.Core.Core.IoC;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("cart/item")]
     [ApiController]
+    [BindOn(typeof(CartItemController))]
     public class CartItemController : ControllerBase
     {
         private readonly ICartItemService cartItemService;
