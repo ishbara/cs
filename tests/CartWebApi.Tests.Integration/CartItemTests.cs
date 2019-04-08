@@ -48,9 +48,12 @@ namespace CartWebApi.Tests.Integration
         public async Task Connects_To_Redis()
         {
             var redisDb = this.InitializeRedis();
-            await redisDb.StringSetAsync("test", "testData");
-            var value = await redisDb.StringGetAsync("test");
+            string key = "test" + Guid.NewGuid();
+            await redisDb.KeyDeleteAsync(key);
+            await redisDb.StringSetAsync(key, "testData");
+            var value = await redisDb.StringGetAsync(key);
             Assert.Equal("testData", value);
+            await redisDb.KeyDeleteAsync(key);
         }
 
         [Fact]
@@ -73,12 +76,15 @@ namespace CartWebApi.Tests.Integration
                 }
             };
             var serializedData = JsonConvert.SerializeObject(userCartData);
+            string key = "cart:" + userCartData.UserId;
+            await redisDb.KeyDeleteAsync(key);
 
             var response = await client.PostAsJsonAsync(Url, request);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var storedValue = await redisDb.StringGetAsync("cart:" + request.UserId);
+            var storedValue = await redisDb.StringGetAsync(key);
             Assert.Equal(serializedData, storedValue.ToString(), StringComparer.InvariantCulture);
+            await redisDb.KeyDeleteAsync(key);
         }
 
         public void Dispose()
@@ -92,7 +98,6 @@ namespace CartWebApi.Tests.Integration
         private IDatabase InitializeRedis()
         {
             var server = this.redisMux.GetServer("localhost:6379");
-            server.FlushDatabase();
             return this.redisMux.GetDatabase();
         }
     }

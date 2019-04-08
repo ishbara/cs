@@ -100,6 +100,27 @@
             Assert.Equal(userCart.Items[cartItem.ProductId].Quantity, totalQuantity);
         }
 
+        [Fact]
+        public async Task Throws_InsufficientStock_Cumulative_Async()
+        {
+            var cartItem = new NewCartItem(1, 2, 2);
+            var secondItem = new NewCartItem(cartItem.UserId, cartItem.ProductId, 3);
+            int totalQuantity = cartItem.Quantity + secondItem.Quantity;
+            this.MoqDefaultSetup(cartItem);
+            this.productApiConnectorMock
+                .Setup(c => c.GetStock(cartItem.ProductId))
+                .Returns(totalQuantity - 1);
+
+            var service = this.GetService();
+            await service.AddCartItemAsync(cartItem);
+            var exc = await Assert.ThrowsAsync<CartException>(
+                () => service.AddCartItemAsync(secondItem));
+            Assert.Equal(CartErrorCode.InsufficientStock, exc.ErrorCode);
+
+            var userCart = await this.dataMock.GetUserCartAsync(cartItem.UserId);
+            Assert.Equal(userCart.Items[cartItem.ProductId].Quantity, cartItem.Quantity);
+        }
+
         private void MoqDefaultSetup(NewCartItem cartItem)
         {
             this.productApiConnectorMock
