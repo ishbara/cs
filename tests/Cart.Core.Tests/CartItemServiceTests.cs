@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using Cart.Core.Connectors;
-    using Cart.Core.Data;
     using Moq;
     using Xunit;
 
@@ -10,13 +9,13 @@
     {
         private readonly Mock<IProductsApiConnector> productApiConnectorMock;
         private readonly Mock<IUserApiConnector> userApiMock;
-        private readonly Mock<ICartItemDataGateway> dataGatewayMock;
+        private readonly CartItemDataMock dataMock;
 
         public CartItemServiceTests()
         {
             this.productApiConnectorMock = new Mock<IProductsApiConnector>();
             this.userApiMock = new Mock<IUserApiConnector>();
-            this.dataGatewayMock = new Mock<ICartItemDataGateway>();
+            this.dataMock = new CartItemDataMock();
         }
 
         [Fact]
@@ -69,14 +68,10 @@
         {
             var cartItem = new CartItem(1, 2, 10);
             this.MoqDefaultSetup(cartItem);
-            this.dataGatewayMock
-                .Setup(d => d.AddCartItemAsync(cartItem))
-                .Returns(Task.CompletedTask)
-                .Verifiable();
 
             var service = this.GetService();
             await service.AddCartItemAsync(cartItem);
-            this.dataGatewayMock.Verify(g => g.AddCartItemAsync(cartItem));
+            Assert.True(this.dataMock.Contains(cartItem));
         }
 
         private void MoqDefaultSetup(CartItem cartItem)
@@ -97,7 +92,7 @@
             return new CartItemService(
                 this.productApiConnectorMock.Object,
                 this.userApiMock.Object,
-                this.dataGatewayMock.Object);
+                this.dataMock);
         }
     }
 }
