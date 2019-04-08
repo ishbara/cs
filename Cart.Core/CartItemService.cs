@@ -1,5 +1,6 @@
 ﻿namespace Cart.Core
 {
+    using System.Threading.Tasks;
     using Cart.Core.Connectors;
     using Cart.Core.Core.IoC;
     using Cart.Core.Data;
@@ -21,10 +22,10 @@
             this.dataGateway = dataGateway;
         }
 
-        public void AddCartItem(CartItem cartItem)
+        public Task AddCartItemAsync(CartItem cartItem)
         {
             this.ValidateForNewCartItem(cartItem);
-            this.dataGateway.AddCartItem(cartItem);
+            return this.dataGateway.AddCartItemAsync(cartItem);
         }
 
         private void ValidateForNewCartItem(CartItem cartItem)

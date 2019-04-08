@@ -6,6 +6,7 @@ namespace CartWebApi.Tests.Integration
     using CartWebAPI;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc.Testing;
+    using StackExchange.Redis;
     using Xunit;
 
     public class CartItemTests
@@ -25,6 +26,18 @@ namespace CartWebApi.Tests.Integration
             var client = this.GetClient();
             var result = await client.PostAsJsonAsync<AddCartItemRequest>(Url, null);
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [Fact]
+        public async Task Connects_To_Redis()
+        {
+            using (var redis = ConnectionMultiplexer.Connect("localhost"))
+            {
+                var redisDb = redis.GetDatabase();
+                await redisDb.StringSetAsync("test", "testData");
+                var value = await redisDb.StringGetAsync("test");
+                Assert.Equal("testData", value);
+            }
         }
 
         private HttpClient GetClient() =>

@@ -1,7 +1,9 @@
 ﻿namespace Cart.Core.Data
 {
+    using System.Threading.Tasks;
+
     public interface ICartItemDataGateway
     {
-        void AddCartItem(CartItem cartItem);
+        Task AddCartItemAsync(CartItem cartItem);
     }
 }

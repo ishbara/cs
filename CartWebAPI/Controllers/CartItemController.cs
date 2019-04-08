@@ -1,5 +1,6 @@
 ﻿namespace CartWebAPI.Controllers
 {
+    using System.Threading.Tasks;
     using Cart.Core;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,11 @@
         }
 
         [HttpPost]
-        public IActionResult Post(AddCartItemRequest request)
+        public async Task<IActionResult> PostAsync(AddCartItemRequest request)
         {
             try
             {
-                this.cartItemService.AddCartItem(request.ToCartItem());
+                await this.cartItemService.AddCartItemAsync(request.ToCartItem());
                 return this.Ok();
             }
             catch (CartException exc)

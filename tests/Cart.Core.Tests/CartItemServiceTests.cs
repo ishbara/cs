@@ -1,5 +1,6 @@
 ﻿namespace Cart.Core.Tests
 {
+    using System.Threading.Tasks;
     using Cart.Core.Connectors;
     using Cart.Core.Data;
     using Moq;
@@ -19,7 +20,7 @@
         }
 
         [Fact]
-        public void Throws_Invalid_Product()
+        public async Task Throws_Invalid_Product_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
             this.userApiMock
@@ -30,13 +31,13 @@
                 .Returns(false);
             var service = this.GetService();
 
-            var exc = Assert.Throws<CartException>(
-                () => service.AddCartItem(cartItem));
+            var exc = await Assert.ThrowsAsync<CartException>(
+                () => service.AddCartItemAsync(cartItem));
             Assert.Equal(CartItemErrorCode.InvalidProduct, exc.ErrorCode);
         }
 
         [Fact]
-        public void Throws_InvalidUser()
+        public async Task Throws_InvalidUser_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
             this.productApiConnectorMock
@@ -47,13 +48,13 @@
                 .Returns(false);
             var service = this.GetService();
 
-            var exc = Assert.Throws<CartException>(
-                () => service.AddCartItem(cartItem));
+            var exc = await Assert.ThrowsAsync<CartException>(
+                () => service.AddCartItemAsync(cartItem));
             Assert.Equal(CartItemErrorCode.InvalidUser, exc.ErrorCode);
         }
 
         [Fact]
-        public void Throws_InsufficientStock()
+        public async Task Throws_InsufficientStock_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
             this.productApiConnectorMock
@@ -67,13 +68,13 @@
                 .Returns(true);
             var service = this.GetService();
 
-            var exc = Assert.Throws<CartException>(
-                () => service.AddCartItem(cartItem));
+            var exc = await Assert.ThrowsAsync<CartException>(
+                () => service.AddCartItemAsync(cartItem));
             Assert.Equal(CartItemErrorCode.InsufficientStock, exc.ErrorCode);
         }
 
         [Fact]
-        public void Adds_CartItem_To_DataStore()
+        public async Task Adds_CartItem_To_DataStore_Async()
         {
             var cartItem = new CartItem(1, 2, 10);
             this.productApiConnectorMock
@@ -86,12 +87,13 @@
                 .Setup(c => c.UserExists(cartItem.UserId))
                 .Returns(true);
             this.dataGatewayMock
-                .Setup(d => d.AddCartItem(cartItem))
+                .Setup(d => d.AddCartItemAsync(cartItem))
+                .Returns(Task.CompletedTask)
                 .Verifiable();
 
             var service = this.GetService();
-            service.AddCartItem(cartItem);
-            this.dataGatewayMock.Verify(g => g.AddCartItem(cartItem));
+            await service.AddCartItemAsync(cartItem);
+            this.dataGatewayMock.Verify(g => g.AddCartItemAsync(cartItem));
         }
 
         private CartItemService GetService()

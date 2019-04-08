@@ -9,15 +9,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{87F7D886
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartWebApi.Tests.Integration", "tests\CartWebApi.Tests.Integration\CartWebApi.Tests.Integration.csproj", "{DC6CB36F-2EF7-40A9-8D24-88321A5D8754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Core", "Cart.Core\Cart.Core.csproj", "{A1AA9CC7-AF89-422A-A3A1-0349C8092998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Core", "Cart.Core\Cart.Core.csproj", "{A1AA9CC7-AF89-422A-A3A1-0349C8092998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.ApiMocks", "Cart.ApiMocks\Cart.ApiMocks.csproj", "{2C4B0608-93EE-498C-A93F-AB75D04F362D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.ApiMocks", "Cart.ApiMocks\Cart.ApiMocks.csproj", "{2C4B0608-93EE-498C-A93F-AB75D04F362D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartWebApi.Tests", "tests\CartWebApi.Tests\CartWebApi.Tests.csproj", "{DD33E7A1-4E1F-406E-90B6-F9BD02439BE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Core.Tests", "tests\Cart.Core.Tests\Cart.Core.Tests.csproj", "{5D43D09B-1E03-4FB2-B77D-553559715F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.SimpleInjector", "Cart.SimpleInjector\Cart.SimpleInjector.csproj", "{9F158119-F1EC-4810-9D55-F19740497E01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.SimpleInjector", "Cart.SimpleInjector\Cart.SimpleInjector.csproj", "{9F158119-F1EC-4810-9D55-F19740497E01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Redis", "Cart.Redis\Cart.Redis.csproj", "{C54A78BA-3F95-409B-B864-B625EDC77C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{9F158119-F1EC-4810-9D55-F19740497E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F158119-F1EC-4810-9D55-F19740497E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F158119-F1EC-4810-9D55-F19740497E01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54A78BA-3F95-409B-B864-B625EDC77C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54A78BA-3F95-409B-B864-B625EDC77C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54A78BA-3F95-409B-B864-B625EDC77C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54A78BA-3F95-409B-B864-B625EDC77C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
