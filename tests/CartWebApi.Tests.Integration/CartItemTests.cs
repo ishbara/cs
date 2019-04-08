@@ -1,9 +1,11 @@
 namespace CartWebApi.Tests.Integration
 {
     using System;
+    using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Cart.Redis;
     using CartWebAPI;
     using CartWebAPI.Model;
     using Microsoft.AspNetCore.Mvc.Testing;
@@ -56,19 +58,27 @@ namespace CartWebApi.Tests.Integration
         {
             var redisDb = this.InitializeRedis();
             var client = this.GetClient();
-            AddCartItemRequest request = new AddCartItemRequest
+            var request = new AddCartItemRequest
             {
                 ProductId = 46,
                 UserId = 14,
                 Quantity = 3
             };
+            var userCartData = new UserCartData
+            {
+                UserId = request.UserId,
+                CartItems = new Dictionary<int, int>
+                {
+                    { request.ProductId, request.Quantity }
+                }
+            };
+            var serializedData = JsonConvert.SerializeObject(userCartData);
 
             var response = await client.PostAsJsonAsync(Url, request);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var storedValue = (await redisDb.ListRangeAsync("cart:" + request.UserId, -2, -1))[0];
-            var serializedCartItem = JsonConvert.SerializeObject(request.ToCartItem());
-            Assert.Equal(serializedCartItem, storedValue.ToString(), StringComparer.InvariantCulture);
+            var storedValue = await redisDb.StringGetAsync("cart:" + request.UserId);
+            Assert.Equal(serializedData, storedValue.ToString(), StringComparer.InvariantCulture);
         }
 
         public void Dispose()

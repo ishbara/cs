@@ -15,7 +15,8 @@
         {
             var cartData = new UserCartData
             {
-                UserId = cart.UserId
+                UserId = cart.UserId,
+                CartItems = new Dictionary<int, int>()
             };
 
             foreach (var item in cart.Items)
