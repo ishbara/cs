@@ -10,6 +10,7 @@
     [Route("cart/item")]
     [ApiController]
     [BindOn(typeof(CartItemController))]
+    [Produces("text/plain", "application/json")]
     public class CartItemController : ControllerBase
     {
         private readonly ICartItemService cartItemService;
@@ -19,7 +20,25 @@
             this.cartItemService = cartItemService;
         }
 
+        /// <summary>
+        /// Adds new item to a user's cart
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///     {
+        ///         "ProductId": 46,
+        ///         "UserId": 14,
+        ///         "Quantity": 2
+        ///     }
+        /// </remarks>
+        /// <param name="request">New Cart Item request</param>
+        /// <returns>Status of the operation</returns>
+        /// <response code="200">Item successfully added</response>
+        /// <response code="400">Cart item canno be added. Review your request.</response>
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+
         public async Task<IActionResult> PostAsync(AddCartItemRequest request)
         {
             try

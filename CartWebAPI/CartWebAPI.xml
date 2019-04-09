@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CartWebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:CartWebAPI.AppBootstrapper">
+            <summary>
+            Performs application startup functions.
+            </summary>
+        </member>
+        <member name="M:CartWebAPI.AppBootstrapper.InitializeDI">
+            <summary>
+            Initializes DI container and binds all dependencies
+            </summary>
+            <returns>The DI container instance</returns>
+        </member>
+        <member name="M:CartWebAPI.Controllers.CartItemController.PostAsync(CartWebAPI.Model.AddCartItemRequest)">
+            <summary>
+            Adds new item to a user's cart
+            </summary>
+            <remarks>
+            Sample request:
+                {
+                    "ProductId": 46,
+                    "UserId": 14,
+                    "Quantity": 2
+                }
+            </remarks>
+            <param name="request">New Cart Item request</param>
+            <returns>Status of the operation</returns>
+            <response code="200">Item successfully added</response>
+            <response code="400">Cart item canno be added. Review your request.</response>
+        </member>
+        <member name="T:CartWebAPI.Model.AddCartItemRequest">
+            <summary>
+            Represents a new cart item request
+            </summary>
+        </member>
+        <member name="P:CartWebAPI.Model.AddCartItemRequest.ProductId">
+            <summary>
+            The id of the product to be added to cart. (Currently allowed 1 - 100)
+            </summary>
+        </member>
+        <member name="P:CartWebAPI.Model.AddCartItemRequest.UserId">
+            <summary>
+            The user id of the cart. (Currently allowed 1 - 20)
+            </summary>
+        </member>
+        <member name="P:CartWebAPI.Model.AddCartItemRequest.Quantity">
+            <summary>
+            The quantitiy of the product to be added to cart.
+            </summary>
+        </member>
+    </members>
+</doc>
