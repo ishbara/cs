@@ -9,7 +9,13 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\cs.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
+    <ItemGroup>
+      <DocFile Include="bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\$(TargetName).xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+  <PropertyGroup>
     <DocumentationFile>C:\Users\extyildiz\source\repos\cs\CartWebAPI\CartWebAPI.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
