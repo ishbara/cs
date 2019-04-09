@@ -97,7 +97,7 @@ namespace CartWebApi.Tests.Integration
 
         private IDatabase InitializeRedis()
         {
-            var server = this.redisMux.GetServer("localhost:6379");
+            this.redisMux.GetServer("localhost:6379");
             return this.redisMux.GetDatabase();
         }
     }
